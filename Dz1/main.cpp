@@ -1,35 +1,87 @@
 //
-// Created by Igor Maschikevich on 11/15/2017.
+// Created by Igor Maschikevich on 11/16/2017.
 //
-//================================================================================
+//==========================================================================================
 #include <iostream>
 #include <string>
-//================================================================================
+#include <cmath>
+//==========================================================================================
 #define GLEW_STATIC
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include "ShadersLoader.h"
-//================================================================================
+//==========================================================================================
 const GLuint WindowWidth = 600;
 const GLuint WindowHeight = 400;
-const char* DefaultNameWindow = "OpenGL 15.11.2017";
-//================================================================================
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
-//================================================================================
-// Coordinates of the triangle
+const char* DefaultNameWindow = "OpenGL Dz1";
+//==========================================================================================
+//void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
+//==========================================================================================
 GLfloat vertices[] = {
-    0.0f,  0.5f, // 1.0
-    -0.5f, -0.5f, // 1.1
-    0.5f, -0.5f  // 1.2
+    // Позиции                // Цвета
+    0.0f,    0.6f,   0.0f,   1.0f, 1.0f, 0.0f,   // 0
+    -0.6f,   -0.6f,   0.0f,   1.0f, 1.0f, 0.0f,   // 1
+    0.6f,   -0.6f,   0.0f,   1.0f, 1.0f, 0.0f,   // 2
+
+    -0.45f,  -0.6f,   0.0f,   1.0f, 0.0f, 1.0f,   // 3
+    -0.15f,  -0.6f,   0.0f,   1.0f, 0.0f, 1.0f,   // 4
+    -0.15f,  -0.8f,   0.0f,   1.0f, 0.0f, 1.0f,   // 5
+    -0.45f,  -0.8f,   0.0f,   1.0f, 0.0f, 1.0f,   // 6
+
+    0.15f,  -0.6f,   0.0f,   1.0f, 1.0f, 1.0f,   // 7
+    0.45f,  -0.6f,   0.0f,   1.0f, 1.0f, 1.0f,   // 8
+    0.45f,  -0.8f,   0.0f,   1.0f, 1.0f, 1.0f,   // 9
+    0.15f,  -0.8f,   0.0f,   1.0f, 1.0f, 1.0f,   // 10
+
+    -0.125f,  0.25f,  0.0f,   0.9f, 0.7f, 0.4f,   // 11
+    -0.6f,    0.25f,  0.0f,   0.9f, 0.7f, 0.4f,   // 12
+    -0.6f,    0.125f, 0.0f,   0.9f, 0.7f, 0.4f,   // 13
+    -0.125f,  0.125f, 0.0f,   0.9f, 0.7f, 0.4f,   // 14
+
+    0.125f, 0.25f,   0.0f,   1.0f, 0.5f, 1.0f,   // 15
+    0.6f,   0.25f,   0.0f,   1.0f, 0.5f, 1.0f,   // 16
+    0.6f,   0.125f,  0.0f,   1.0f, 0.5f, 1.0f,   // 17
+    0.125f, 0.125f,  0.0f,   1.0f, 0.5f, 1.0f,   // 18
+
+    0.05f,  0.5f,    0.0f,   0.0f, 0.0f, 0.0f,   // 19
+    -0.05f,  0.5f,    0.0f,   0.0f, 0.0f, 0.0f,   // 20
+    0.0f,   0.6f,    0.0f,   0.0f, 0.0f, 0.0f,   // 21
+
+    -0.05f,  0.7f,    0.0f,   0.0f, 0.0f, 0.0f,   // 22
+    0.05f,  0.7f,    0.0f,   0.0f, 0.0f, 0.0f,   // 23
+
+    -0.1f,   0.55f,   0.0f,   0.0f, 0.0f, 0.0f,   // 24
+    -0.1f,   0.65f,   0.0f,   0.0f, 0.0f, 0.0f,   // 25
+
+    0.1f,   0.55f,   0.0f,   0.0f, 0.0f, 0.0f,   // 26
+    0.1f,   0.65f,   0.0f,   0.0f, 0.0f, 0.0f,   // 27
 };
 unsigned int indices[] = {
-    1, 2, 0
+    1, 2, 0,
+    3, 6, 5,
+    4, 5, 3,
+    7, 10, 9,
+    8, 9, 7,
+    13, 14, 11,
+    11, 12, 13,
+    18, 17, 16,
+    16, 15, 18,
+    20, 19, 21,
+    21, 23, 22,
+
+    24, 21, 25,
+    21, 26, 27,
+
+    20, 21, 24,
+    25, 21, 22,
+
+    19, 26, 21,
+    21, 27, 23
 };
-//================================================================================
+//==========================================================================================
 //void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
-//================================================================================
-int main()
-{
+//==========================================================================================
+int main(){
     using namespace std;
     // Initialization GLFW
     glfwInit();
@@ -62,7 +114,7 @@ int main()
     //================================================================================
     // Assembling a vertex shader
     auto vertexShader = glCreateShader(GL_VERTEX_SHADER);
-    std::string vertexShaderSource =shaders::loadShaderSourceFromFile("shaders/text.vert");
+    string vertexShaderSource =shaders::loadShaderSourceFromFile("shaders/dz1.vert");
     const char* vertexShaderSourceNative =vertexShaderSource.c_str();
     glShaderSource (vertexShader, 1, &vertexShaderSourceNative, NULL);
     glCompileShader(vertexShader);
@@ -78,7 +130,7 @@ int main()
     //================================================================================
     // Assembling a fragment shader
     auto fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-    std::string fragmentShaderSource =shaders::loadShaderSourceFromFile("shaders/text.frag");
+    std::string fragmentShaderSource =shaders::loadShaderSourceFromFile("shaders/dz1.frag");
     const char* fragmentShaderSourceNative =fragmentShaderSource.c_str();
     glShaderSource (fragmentShader, 1, &fragmentShaderSourceNative, NULL);
     glCompileShader(fragmentShader);
@@ -117,11 +169,14 @@ int main()
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
     // 3. We set pointers to the vertex attributes
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), (GLvoid*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)0);
     glEnableVertexAttribArray(0);
+    // 4. We set colors to the vertex attributes
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)(3* sizeof(GLfloat)));
+    glEnableVertexAttribArray(1);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
-
+    // 5. Copy our array of indices to the buffer for OpenGL
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
     glBindVertexArray(0);
@@ -129,13 +184,15 @@ int main()
     while (!glfwWindowShouldClose(window)){
         glClearColor(0.2f, 0.6f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
+        // Use shaderProgram
         glUseProgram(shaderProgram);
         glBindVertexArray(VAO);
-        glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
+        glDrawElements(GL_TRIANGLES, 51, GL_UNSIGNED_INT, 0);
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
     //================================================================================
+    // Delete VAO, VBO, EBO
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
     glDeleteBuffers(1, &EBO);
@@ -143,10 +200,10 @@ int main()
     glfwTerminate();
     return 0;
 }
-//================================================================================
+//==========================================================================================
 // Function for control. For exit press -  q;
 //void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode){
 //    if (key == GLFW_KEY_Q && action == GLFW_PRESS)
 //        glfwSetWindowShouldClose(window, GL_TRUE);
 //}
-//================================================================================
+//==========================================================================================

@@ -25,3 +25,4 @@ add_subdirectory(Soil)
 add_subdirectory(MotokoGL)
 
 add_subdirectory(15112017)
+add_subdirectory(Dz1)

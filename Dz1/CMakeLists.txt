@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.1)
-project (15112017)
+project (Dz1)
 
 set (CMAKE_CXX_STANDARD 14)
 
@@ -15,6 +15,10 @@ set (SOURCE_FILES
     ShadersLoader.h
     ShadersLoader.cpp
     )
+
+
+# MESSAGE( STATUS "GLFW_LIB = " ${GLFW_LIB})
+
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} ${GLFW_LIB} ${GLEW_LIB} ${GL_LIB})
 
