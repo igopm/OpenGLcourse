@@ -4,7 +4,7 @@
 //==========================================================================================
 #include <iostream>
 #include <string>
-#include <cmath>
+#include <math.h>
 //==========================================================================================
 #define GLEW_STATIC
 #include <GL/glew.h>
@@ -13,70 +13,75 @@
 //==========================================================================================
 const GLuint WindowWidth = 600;
 const GLuint WindowHeight = 400;
-const char* DefaultNameWindow = "OpenGL Dz1";
 //==========================================================================================
 //void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 //==========================================================================================
+//void drawCircle(GLfloat x, GLfloat y, GLfloat z, GLfloat radius, GLint namberTirangls);
+//==========================================================================================
 GLfloat vertices[] = {
-    // Позиции                // Цвета
-    0.0f,    0.6f,   0.0f,   1.0f, 1.0f, 0.0f,   // 0
-    -0.6f,   -0.6f,   0.0f,   1.0f, 1.0f, 0.0f,   // 1
-    0.6f,   -0.6f,   0.0f,   1.0f, 1.0f, 0.0f,   // 2
+    //Positions              //Colors
+    0.3f,     0.5f,  0.0f,   0.604f, 0.804f, 0.196f,     // 0
+    -0.3f,    -0.6f,  0.0f,   0.604f, 0.804f, 0.196f,   // 1
+    0.3f,    -0.6f,   0.0f,    0.686f, 0.933f, 0.933f,   // 2
+    -0.3f,     0.5f,  0.0f,     0.686f, 0.933f, 0.933f,  // 3
 
-    -0.45f,  -0.6f,   0.0f,   1.0f, 0.0f, 1.0f,   // 3
-    -0.15f,  -0.6f,   0.0f,   1.0f, 0.0f, 1.0f,   // 4
-    -0.15f,  -0.8f,   0.0f,   1.0f, 0.0f, 1.0f,   // 5
-    -0.45f,  -0.8f,   0.0f,   1.0f, 0.0f, 1.0f,   // 6
 
-    0.15f,  -0.6f,   0.0f,   1.0f, 1.0f, 1.0f,   // 7
-    0.45f,  -0.6f,   0.0f,   1.0f, 1.0f, 1.0f,   // 8
-    0.45f,  -0.8f,   0.0f,   1.0f, 1.0f, 1.0f,   // 9
-    0.15f,  -0.8f,   0.0f,   1.0f, 1.0f, 1.0f,   // 10
+    -0.25f,   -0.6f,   0.0f,   1.0f, 0.0f, 1.0f,  // 4
+    -0.15f,   -0.6f,   0.0f,   1.0f, 0.0f, 1.0f,  // 5
+    -0.15f,   -0.8f,   0.0f,   1.0f, 0.0f, 1.0f,  // 6
+    -0.25f,   -0.8f,   0.0f,   1.0f, 0.0f, 1.0f,  // 7
 
-    -0.125f,  0.25f,  0.0f,   0.9f, 0.7f, 0.4f,   // 11
-    -0.6f,    0.25f,  0.0f,   0.9f, 0.7f, 0.4f,   // 12
-    -0.6f,    0.125f, 0.0f,   0.9f, 0.7f, 0.4f,   // 13
-    -0.125f,  0.125f, 0.0f,   0.9f, 0.7f, 0.4f,   // 14
+    0.15f,   -0.6f,   0.0f,   1.0f, 1.0f, 1.0f,   // 8
+    0.25f,   -0.6f,   0.0f,   1.0f, 1.0f, 1.0f,   // 9
+    0.25f,   -0.8f,   0.0f,   1.0f, 1.0f, 1.0f,   // 10
+    0.15f,   -0.8f,   0.0f,   1.0f, 1.0f, 1.0f,   // 11
 
-    0.125f, 0.25f,   0.0f,   1.0f, 0.5f, 1.0f,   // 15
-    0.6f,   0.25f,   0.0f,   1.0f, 0.5f, 1.0f,   // 16
-    0.6f,   0.125f,  0.0f,   1.0f, 0.5f, 1.0f,   // 17
-    0.125f, 0.125f,  0.0f,   1.0f, 0.5f, 1.0f,   // 18
+    -0.2f,    0.25f,  0.0f,   0.9f, 0.7f, 0.4f,   // 12
+    -0.6f,    0.25f,  0.0f,   0.9f, 0.7f, 0.4f,   // 13
+    -0.6f,    0.125f, 0.0f,   0.9f, 0.7f, 0.4f,   // 14
+    -0.2f,    0.125f, 0.0f,   0.9f, 0.7f, 0.4f,   // 15
 
-    0.05f,  0.5f,    0.0f,   0.0f, 0.0f, 0.0f,   // 19
-    -0.05f,  0.5f,    0.0f,   0.0f, 0.0f, 0.0f,   // 20
-    0.0f,   0.6f,    0.0f,   0.0f, 0.0f, 0.0f,   // 21
+    0.2f, 0.25f,   0.0f,   1.0f, 0.5f, 1.0f,   // 16
+    0.6f,   0.25f,   0.0f,   1.0f, 0.5f, 1.0f,   // 17
+    0.6f,   0.125f,  0.0f,   1.0f, 0.5f, 1.0f,   // 18
+    0.2f, 0.125f,  0.0f,   1.0f, 0.5f, 1.0f,   // 19
 
-    -0.05f,  0.7f,    0.0f,   0.0f, 0.0f, 0.0f,   // 22
-    0.05f,  0.7f,    0.0f,   0.0f, 0.0f, 0.0f,   // 23
+    0.05f,  0.5f,    0.0f,   1.0f, 1.0f, 0.0f,   // 20
+    -0.05f,  0.5f,    0.0f,   1.0f, 1.0f, 0.0f,   // 21
+    0.0f,   0.6f,    0.0f,   1.0f, 1.0f, 0.0f,   // 22
 
-    -0.1f,   0.55f,   0.0f,   0.0f, 0.0f, 0.0f,   // 24
-    -0.1f,   0.65f,   0.0f,   0.0f, 0.0f, 0.0f,   // 25
+    -0.05f,  0.7f,    0.0f,   1.0f, 1.0f, 0.0f,   // 23
+    0.05f,  0.7f,    0.0f,   1.0f, 1.0f, 0.0f,   // 24
 
-    0.1f,   0.55f,   0.0f,   0.0f, 0.0f, 0.0f,   // 26
-    0.1f,   0.65f,   0.0f,   0.0f, 0.0f, 0.0f,   // 27
+    -0.1f,   0.55f,   0.0f,   1.0f, 1.0f, 0.0f,   // 25
+    -0.1f,   0.65f,   0.0f,   1.0f, 1.0f, 0.0f,   // 26
+
+    0.1f,   0.55f,   0.0f,   1.0f, 1.0f, 0.0f,   // 27
+    0.1f,   0.65f,   0.0f,   1.0f, 1.0f, 0.0f,   // 28
 };
 unsigned int indices[] = {
     1, 2, 0,
-    3, 6, 5,
-    4, 5, 3,
-    7, 10, 9,
-    8, 9, 7,
-    13, 14, 11,
-    11, 12, 13,
+    3, 1, 0,
+    4, 7, 6,
+    5, 6, 4,
+    8, 11, 10,
+    9, 10, 8,
+    14, 15, 12,
+    12, 13, 14,
     18, 17, 16,
-    16, 15, 18,
-    20, 19, 21,
-    21, 23, 22,
+    18, 16, 19,
 
-    24, 21, 25,
-    21, 26, 27,
+    21, 20, 22,
+    22, 24, 23,
 
-    20, 21, 24,
-    25, 21, 22,
+    25, 22, 26,
+    //    21, 26, 27,
 
-    19, 26, 21,
-    21, 27, 23
+    21, 22, 25,
+    26, 22, 23,
+
+    20, 27, 22,
+    22, 28, 24
 };
 //==========================================================================================
 //void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
@@ -92,15 +97,15 @@ int main(){
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
     // for Mac OS X
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-    //объект окна
-    GLFWwindow* window = glfwCreateWindow(WindowWidth, WindowHeight, DefaultNameWindow, nullptr, nullptr);
+    //window
+    GLFWwindow* window = glfwCreateWindow(WindowWidth, WindowHeight, "OpenGL Dz1", nullptr, nullptr);
     if (window == nullptr){
         cout <<"Failed to create GLEW window" << endl;
         glfwTerminate();
     }
     glfwMakeContextCurrent(window);
     //================================================================================
-    //    glfwSetKeyCallback(window, key_callback);
+    // glfwSetKeyCallback(window, key_callback);
     //================================================================================
     glewExperimental = GL_TRUE;
     if (glewInit() != GLEW_OK){
@@ -114,8 +119,8 @@ int main(){
     //================================================================================
     // Assembling a vertex shader
     auto vertexShader = glCreateShader(GL_VERTEX_SHADER);
-    string vertexShaderSource =shaders::loadShaderSourceFromFile("shaders/dz1.vert");
-    const char* vertexShaderSourceNative =vertexShaderSource.c_str();
+    string vertexShaderSource = shaders::loadShaderSourceFromFile("shaders/dz1.vert");
+    const char* vertexShaderSourceNative = vertexShaderSource.c_str();
     glShaderSource (vertexShader, 1, &vertexShaderSourceNative, NULL);
     glCompileShader(vertexShader);
 
@@ -181,11 +186,17 @@ int main(){
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
     glBindVertexArray(0);
     //================================================================================
-    while (!glfwWindowShouldClose(window)){
+    GLfloat vertex [] = {0.0f, 0.0f, 0.0f};
+    GLuint m_vertexBuffer;
+    glGenBuffers(1, &m_vertexBuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 3, &vertex[0], GL_STATIC_DRAW);
+    while(!glfwWindowShouldClose(window)){
         glClearColor(0.2f, 0.6f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
         // Use shaderProgram
         glUseProgram(shaderProgram);
+
         glBindVertexArray(VAO);
         glDrawElements(GL_TRIANGLES, 51, GL_UNSIGNED_INT, 0);
         glfwSwapBuffers(window);
@@ -206,4 +217,5 @@ int main(){
 //    if (key == GLFW_KEY_Q && action == GLFW_PRESS)
 //        glfwSetWindowShouldClose(window, GL_TRUE);
 //}
+// glEnable(GL_DEPTH_TEST);
 //==========================================================================================
