@@ -6,7 +6,7 @@ set (CMAKE_CXX_STANDARD 14)
 # Source files
 set (SOURCE_FILES
       ./glheader.h
-      ./fatal.h
+      ./MotokoError.h
       ./Window.cpp ./Window.h
       ./ShaderProg.cpp ./ShaderProg.h
       ./IVao.h
@@ -17,6 +17,7 @@ set (SOURCE_FILES
       ./MaterialT.h
       ./MotokoGL.h
       ./Light.h
+        ./stb_image.h ./stb_image.cpp
         )
 
 add_library(MotokoGL ${SOURCE_FILES})

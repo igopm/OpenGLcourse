@@ -12,14 +12,16 @@ file(COPY ../common_textures DESTINATION .)
 # Source files
 set (SOURCE_FILES
     main.cpp
-    ShadersLoader.h
-    ShadersLoader.cpp
+    Shader.h
+    Shader.cpp
+    vaofactory.h
+    vaofactory.cpp
     )
 
 
 # MESSAGE( STATUS "GLFW_LIB = " ${GLFW_LIB})
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
-target_link_libraries(${PROJECT_NAME} Soil ${GLFW_LIB} ${GLEW_LIB} ${GL_LIB})
+target_link_libraries(${PROJECT_NAME} Soil MotokoGL ${GLFW_LIB} ${GLEW_LIB} ${GL_LIB})
 
 
