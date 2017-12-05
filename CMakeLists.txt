@@ -15,8 +15,8 @@ include_directories(
     Soil
     )
 
-find_package( OpenCV REQUIRED )
-include_directories( ${OpenCV_INCLUDE_DIRS} )
+# Threads
+#find_package(Threads)
 
 # Build SOIL library
 add_subdirectory(Soil)
@@ -27,3 +27,4 @@ add_subdirectory(MotokoGL)
 add_subdirectory(15112017)
 add_subdirectory(Dz1)
 add_subdirectory(Dz2)
+add_subdirectory(Dz3)

@@ -151,7 +151,7 @@ int main(){
     Tex texBG = Tex::fromFile("common_textures/wall.jpg");
     Tex texBody = Tex::fromFile("common_textures/container2.jpg");
     //    Tex texFase = Tex::fromFile("common_textures/awesomeface.png");
-    //================================================================================
+    //===============================================================================
     //==============================================================================================
     while(!glfwWindowShouldClose(window)){
         glClearColor(0.2f, 0.6f, 0.3f, 1.0f);
@@ -183,3 +183,4 @@ int main(){
     return 0;
 }
 //==========================================================================================
+

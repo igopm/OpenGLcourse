@@ -14,7 +14,7 @@
 const GLuint WindowWidth = 600;
 const GLuint WindowHeight = 400;
 //==========================================================================================
-//void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 //==========================================================================================
 //void drawCircle(GLfloat x, GLfloat y, GLfloat z, GLfloat radius, GLint namberTirangls);
 //==========================================================================================
@@ -105,7 +105,7 @@ int main(){
     }
     glfwMakeContextCurrent(window);
     //================================================================================
-    // glfwSetKeyCallback(window, key_callback);
+     glfwSetKeyCallback(window, key_callback);
     //================================================================================
     glewExperimental = GL_TRUE;
     if (glewInit() != GLEW_OK){
@@ -213,9 +213,9 @@ int main(){
 }
 //==========================================================================================
 // Function for control. For exit press -  q;
-//void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode){
-//    if (key == GLFW_KEY_Q && action == GLFW_PRESS)
-//        glfwSetWindowShouldClose(window, GL_TRUE);
-//}
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode){
+    if (key == GLFW_KEY_Q && action == GLFW_PRESS)
+        glfwSetWindowShouldClose(window, GL_TRUE);
+}
 // glEnable(GL_DEPTH_TEST);
 //==========================================================================================
